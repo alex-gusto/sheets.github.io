@@ -1,0 +1,81 @@
+:root {
+    --zg-row-height: 20px;
+    --zg-cell-font-size: 10px;
+}
+
+zg-body .expand zg-head {
+    display: none;
+}
+
+
+.zg-body {
+    background: #fff;
+}
+
+zing-grid[loading] {
+    height: 500px;
+}
+
+/** Expandable Row Trigger **/
+.zg-body .arrow {
+    display: inline-block;
+    transform: rotate(90deg);
+    transform-origin: 0% 0%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: relative;
+    left: 2.5rem;
+    top: 0.25rem;
+}
+
+.zg-body .active .arrow {
+    transform: rotate(180deg);
+    left: 2.5rem;
+    top: 1.5rem;
+}
+
+/** Expandable Row Header **/
+.zg-body .row--header {
+    display: flex;
+    align-items: center;
+}
+
+.zg-body .team--info {
+    margin-left: 2.5rem;
+}
+
+/** Expandable Row CSS **/
+.zg-body zg-cell[type="custom"] {
+    padding: 0;
+}
+
+.zg-body .default {
+    border-bottom: 1px solid #ebebeb;
+}
+
+.zg-body zg-row:hover {
+    cursor: pointer;
+    background-color: #f5f7fa;
+    transition: background-color 0.25s ease-in;
+}
+
+.zg-body .expandable {
+    background: #f5f5f5;
+    display: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.zg-body .active .expandable {
+    display: block;
+}
+
+/** Set padding **/
+/** NOTE: Css looks off here, but it is to fix how it looks on site **/
+.zg-body .default, .expandable {
+    line-height: 1.5rem;
+}
+
+.zg-body .default--arrow {
+    padding: 0.9rem 0;
+}
