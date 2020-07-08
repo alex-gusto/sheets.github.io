@@ -7,7 +7,7 @@ import createFlatter from '../helpers/flat-data'
 
 window.assignDataToNestedGrid = (index, cellRef, recordRef) => {
     if (cellRef) {
-        const holder = cellRef.querySelector('zing-grid').setData(JSON.stringify(index))
+        cellRef.querySelector('zing-grid').setData(JSON.stringify(index))
     }
 }
 export default class ZingGridView extends Component {
