@@ -4,7 +4,7 @@ import NavBar from './components/NavBar'
 import Handsontable from './views/Handsontable'
 import SpreadJS from './views/SpreadJS'
 import ZingGrid from './views/ZingGrid'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 
 
 class Sample extends Component {
@@ -12,7 +12,7 @@ class Sample extends Component {
         return (
             <div className='app-container'>
                 <Header/>
-                <BrowserRouter>
+                <HashRouter>
                     <NavBar/>
                     <div className="views-container">
                         <Switch>
@@ -27,7 +27,7 @@ class Sample extends Component {
                             </Route>
                         </Switch>
                     </div>
-                </BrowserRouter>
+                </HashRouter>
                 <Footer/>
             </div>
         )
