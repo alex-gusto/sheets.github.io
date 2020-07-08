@@ -3,7 +3,8 @@ import dataService from '../db/dataService'
 import performance from '../helpers/perfomance'
 import createFlatter from '../helpers/flat-data'
 import '@grapecity/spread-sheets/styles/gc.spread.sheets.excel2013white.css';
-import GC from '../assets/gc.spread.sheets.all.13.1.1.min';
+
+const GC = window.GC
 
 function columnToLetter(column) {
     let temp, letter = '';
