@@ -19,10 +19,13 @@ class SpreadSheetsCon extends Component {
     componentDidMount() {
         const time = performance(this.initTable)
         this.setState({ time })
+        const lis = document.querySelector('#hot-display-license-info')
+        if (lis) lis.remove()
     }
 
     componentWillUnmount() {
-        document.querySelector('#hot-display-license-info').remove()
+        const lis = document.querySelector('#hot-display-license-info')
+        if (lis) lis.remove()
     }
 
     initTable = () => {
