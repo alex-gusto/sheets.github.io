@@ -3,6 +3,7 @@
     border-right: 2px solid #e3e3e3;
     grid-area: navigation;
     overflow: auto;
+    flex: 1 0 200px;
 }
 
 .navigationBar h3 {

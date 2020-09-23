@@ -5,7 +5,10 @@
   "homepage": "https://alex-gusto.github.io/sheets.github.io",
   "dependencies": {
     "@grapecity/spread-sheets": "^13.1.4",
+    "@grapecity/wijmo.grid.xlsx": "^5.20202.724",
+    "@grapecity/wijmo.react.all": "^5.20202.724",
     "handsontable": "^7.4.2",
+    "jszip": "^3.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -35,5 +38,7 @@
       "last 1 safari version"
     ]
   },
-  "eslintIgnore": ["gc.spread.sheets.all.13.1.1.min.js"]
+  "eslintIgnore": [
+    "gc.spread.sheets.all.13.1.1.min.js"
+  ]
 }
