@@ -12,6 +12,7 @@ class NavBar extends Component {
                     <Link to="/spread-js" className="navItem">Spread JS</Link>
                     <Link to="/zing-grid" className="navItem">Zing Grid</Link>
                     <Link to="/wijmo-grid" className="navItem">Wijmo Grid</Link>
+                    <Link to="/tree-grid" className="navItem">Tree Grid</Link>
                 </nav>
 
                 <div className="features">

@@ -5,6 +5,7 @@ import Handsontable from './views/Handsontable'
 import SpreadJS from './views/SpreadJS'
 import ZingGrid from './views/ZingGrid'
 import WijmoGrid from './views/WijmoGrid'
+import TreeGrid from './views/TreeGrid'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
 
@@ -26,6 +27,10 @@ class Sample extends Component {
                         </Route>
                         <Route path="/wijmo-grid">
                             <WijmoGrid/>
+                        </Route>
+
+                        <Route path="/tree-grid">
+                            <TreeGrid/>
                         </Route>
                     </Switch>
                 </div>
