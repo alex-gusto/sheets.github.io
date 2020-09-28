@@ -107,7 +107,7 @@ class TreeGrid extends Component {
     }
 
     populate = (Grid, Row, Value) => {
-        ['2016-06-13', '2016-06-13/1', '2016-06-14'].forEach(key => {
+        ['2016-06-13', '2016-06-13/1', '2016-06-14', '2016-06-14/1', '2016-06-15'].forEach(key => {
             Grid.SetValue(Row, `populatedDay-${key}`, Value, 1)
         })
     }

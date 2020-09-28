@@ -64,11 +64,25 @@ export default {
             CanEdit: 1
         },
         {
-            Name: 'day-2016-06-13/1'
+            Name: 'day-2016-06-13/1',
+            Formula: 'day-2016-06-13/1 ? day-2016-06-13/1 : Get(Row, "populatedDay-2016-06-13/1")',
+            CanEdit: 1
         },
-        { Name: 'day-2016-06-14' },
-        { Name: 'day-2016-06-14/1' },
-        { Name: 'day-2016-06-15' },
+        {
+            Name: 'day-2016-06-14',
+            Formula: 'day-2016-06-14 ? day-2016-06-14 : Get(Row, "populatedDay-2016-06-14")',
+            CanEdit: 1
+        },
+        {
+            Name: 'day-2016-06-14/1',
+            Formula: 'day-2016-06-14/1 ? day-2016-06-14/1 : Get(Row, "populatedDay-2016-06-14/1")',
+            CanEdit: 1
+        },
+        {
+            Name: 'day-2016-06-15',
+            Formula: 'day-2016-06-15 ? day-2016-06-15 : Get(Row, "populatedDay-2016-06-15")',
+            CanEdit: 1
+        },
         { Name: 'afterOffhire' }
     ],
     Header: {
