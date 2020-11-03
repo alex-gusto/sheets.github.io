@@ -8,6 +8,7 @@ class NavBar extends Component {
             <div className="navigationBar">
                 <h3>Navigation</h3>
                 <nav className="navigationBarList">
+                    <Link to="/time-tracker" className="navItem">Time tracker</Link>
                     <Link to="/" className="navItem">Handsontable</Link>
                     <Link to="/spread-js" className="navItem">Spread JS</Link>
                     <Link to="/zing-grid" className="navItem">Zing Grid</Link>

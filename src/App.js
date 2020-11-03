@@ -6,6 +6,7 @@ import SpreadJS from './views/SpreadJS'
 import ZingGrid from './views/ZingGrid'
 import WijmoGrid from './views/WijmoGrid'
 import TreeGrid from './views/TreeGrid'
+import TimeTracker from './views/TimeTracker'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
 
@@ -16,6 +17,10 @@ class Sample extends Component {
                 <NavBar/>
                 <div className="views-container">
                     <Switch>
+                        <Route path="/time-tracker">
+                            <TimeTracker/>
+                        </Route>
+
                         <Route exact path="/">
                             <Handsontable/>
                         </Route>

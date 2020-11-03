@@ -11,18 +11,19 @@ export default {
         Sorting: 0,
         Paging: 2,
         PageLength: 1,
-        AutoUpdate: 0,
+        AutoUpdate: 1,
         StandardFilter: 3,
         SaveExpanded: 1,
         PersistentCfg: 2,
-        Filtered: 0
+        Filtered: 0,
+        DebugCalc: 1
     },
     Actions: {
         OnRightClickCell: 'Grid.Component.showCustomMenu(Row,Col)' // Custom event handler, shows the calling method of the framework component; Shows some custom popup menu on right click to any cell
     },
     Def: {
         R: {
-            Expanded: 0
+            Expanded: 1
         },
         Cost: {},
         CostGroup: {
@@ -64,23 +65,36 @@ export default {
             CanEdit: 1
         },
         {
-            Name: 'day-2016-06-13/1',
-            Formula: 'day-2016-06-13/1 ? day-2016-06-13/1 : Get(Row, "populatedDay-2016-06-13/1")',
+            Name: 'day-2016-06-13_1',
+            Formula: 'day-2016-06-13_1 ? day-2016-06-13_1 : Get(Row, "populatedDay-2016-06-13_1")',
+            CanEdit: 0
+        },
+        {
+            Name: 'X',
+            Formula: 'Grid.Component.isAcc ? day-2016-06-13 + day-2016-06-13_1 : day-2016-06-13_1',
+            OnChange: 'Grid.SetValue(Row,"day-2016-06-13_1",Value,1)',
+            // Formula: 'day-2016-06-13_1 ? day-2016-06-13_1 : Get(Row, "populatedDay-2016-06-13_1")',
             CanEdit: 1
         },
         {
             Name: 'day-2016-06-14',
-            Formula: 'day-2016-06-14 ? day-2016-06-14 : Get(Row, "populatedDay-2016-06-14")',
+            CanEdit: 0
+        },
+        {
+            Name: 'Y',
+            Formula: 'Grid.Component.isAcc ? X + day-2016-06-14 : day-2016-06-14',
+            OnChange: 'Grid.SetValue(Row,"day-2016-06-14",Value,1)',
+            // Formula: 'day-2016-06-13_1 ? day-2016-06-13_1 : Get(Row, "populatedDay-2016-06-13_1")',
             CanEdit: 1
         },
         {
-            Name: 'day-2016-06-14/1',
-            Formula: 'day-2016-06-14/1 ? day-2016-06-14/1 : Get(Row, "populatedDay-2016-06-14/1")',
+            Name: 'day-2016-06-14_1',
+            // Formula: 'day-2016-06-14_1 ? day-2016-06-14_1 : Get(Row, "populatedDay-2016-06-14_1")',
             CanEdit: 1
         },
         {
             Name: 'day-2016-06-15',
-            Formula: 'day-2016-06-15 ? day-2016-06-15 : Get(Row, "populatedDay-2016-06-15")',
+            // Formula: 'day-2016-06-15 ? day-2016-06-15 : Get(Row, "populatedDay-2016-06-15")',
             CanEdit: 1
         },
         { Name: 'afterOffhire' }
@@ -95,11 +109,12 @@ export default {
         populateDaily: "Populate Daily",
         prior: "Before onhire",
         'day-2016-06-13': "2016-06-13",
-        'day-2016-06-13/1': "2016-06-13/1",
+        'day-2016-06-13_1': "2016-06-13/1",
         'day-2016-06-14': "2016-06-14",
-        'day-2016-06-14/1': "2016-06-14/1",
-        'day-2016-06-15': "2016-06-15",
-        afterOffhire: "After offhire"
+        'day-2016-06-14_1': "2016-06-14/1",
+        'day-2016-06-15': "<span class='vertical-lr'>2016-06-15</span>",
+        afterOffhire: "After offhire",
+        NoEscape: 1
     },
     // Root: { CDef: 'Node' },
     Head: [

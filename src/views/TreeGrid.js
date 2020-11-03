@@ -2,7 +2,7 @@ import React, { Component, createRef, Fragment } from 'react';
 import layout from './TreeDef'
 import dataService from '../db/dataService'
 import uid from 'uid'
-
+// import './tree-grid.css'
 
 const LS_KEY = `data-2`
 
@@ -19,7 +19,7 @@ function migrateData(arr) {
         const days = Object.entries(item.days)
         if (days.length) {
             days.forEach(([day, value]) => {
-                item[`day-${day}`] = value
+                item[`day-${day.replace('/', '_')}`] = value
             })
         }
 
@@ -27,11 +27,12 @@ function migrateData(arr) {
             const populatedDays = Object.entries(item.populatedDays)
             if (populatedDays.length) {
                 populatedDays.forEach(([day, value]) => {
-                    item[`populatedDay-${day}`] = value
+                    item[`populatedDay-${day.replace('/', '_')}`] = value
                 })
             }
         }
 
+        // item.Def = 'Cost'
         delete item.__children
         delete item.group
         delete item.days
@@ -54,7 +55,8 @@ const getBody = () => {
 }
 
 class TreeGrid extends Component {
-    Grid = null;
+    Grid = null
+    isAcc = false
     tagRef = createRef()
     _body = getBody()
     _worker = new Worker("/sheets.github.io/worker.js")
@@ -77,7 +79,8 @@ class TreeGrid extends Component {
 
         new Promise(resolve => {
             this.Grid = window.TreeGrid({
-                Debug: '',
+                Debug: 'problem',
+                DebugCalc: 1,
                 Layout: {
                     Data: layout
                 },
@@ -96,8 +99,8 @@ class TreeGrid extends Component {
             }, this.tagRef.current, { Component: this });
 
             window.Grids.OnAfterValueChanged = this.updateData
-            window.Grids.OnSave = (grid, row, b) => {
-                console.log(row, b)
+            window.Grids.OnSave = (grid, row) => {
+                console.log(grid.GetXmlData())
             }
         })
     }
@@ -107,7 +110,7 @@ class TreeGrid extends Component {
     }
 
     populate = (Grid, Row, Value) => {
-        ['2016-06-13', '2016-06-13/1', '2016-06-14', '2016-06-14/1', '2016-06-15'].forEach(key => {
+        ['2016-06-13', '2016-06-13_1', '2016-06-14', '2016-06-14_1', '2016-06-15'].forEach(key => {
             Grid.SetValue(Row, `populatedDay-${key}`, Value, 1)
         })
     }
@@ -125,8 +128,18 @@ class TreeGrid extends Component {
 
     showCustomMenu = (row, col) => {
         var G = this.Grid;
+        const self = this
         this.Grid.ShowMenu(row, col, {
             Items: [
+                {
+                    Name: self.isAcc ? "Individual" : "Accumulative",
+                    OnClick() {
+                        self.isAcc = !self.isAcc
+                        G.ReloadBody(() => {
+                            console.log('done')
+                        })
+                    }
+                },
                 {
                     Name: row.Deleted ? "Undelete row" : "Delete row",
                     OnClick: function () {
