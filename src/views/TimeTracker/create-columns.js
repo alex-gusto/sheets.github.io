@@ -63,7 +63,8 @@ export default ({ isAux }) => {
             OnChange: 'Grid.SetValue(Row, "unPtHours", Value, 1)',
             MinWidth: 80,
             Format: ',0.00',
-            Formula: 'Grid.Helpers.isEmpty(afeHours) ? actualHours : ""',
+            ClassFormula: 'Grid.Helpers.isEmpty(unPtHours) && "TSClassReadOnly"',
+            Formula: 'Grid.Helpers.isNotEmpty(unPtHours) ? unPtHours : Grid.Helpers.isEmpty(afeHours) ? actualHours : ""',
             Type: 'Float'
         },
         {
