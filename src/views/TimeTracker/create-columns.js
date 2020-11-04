@@ -1,4 +1,4 @@
-export default () => {
+export default ({ isAux }) => {
     const cols = [
         {
             Name: 'afeHours',
@@ -24,7 +24,7 @@ export default () => {
         {
             Name: 'actualHours',
             MinWidth: 80,
-            CanEmpty: 1,
+            CanEmpty: isAux ? 0 : 1,
             Format: ',0.00',
             Type: 'Float'
         },

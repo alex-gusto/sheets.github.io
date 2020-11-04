@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TreeGridComponent from '../../../components/TreeGridComponent'
-import deepClone from '../../../helpers/deep-clone'
+
 
 // Layout
 import mergeLayouts from '../../../components/TreeGridComponent/utils/merge-layouts'
@@ -50,81 +50,45 @@ class TimeTrackerGrid extends Component {
     static nestedKey = 'Items'
     layout = this.createLayout()
 
-    state = {
-        body: this.prepareBody()
-    }
-
     componentDidMount() {
-        TGAddEvent("OnValidate", "TimeTracker", this.onValidate);
+        const { id } = this.props
+        TGAddEvent("OnValidate", id, this.onValidate);
     }
 
     componentWillUnmount() {
-        TGDelEvent("OnValidate", "TimeTracker", this.onValidate);
+        const { id } = this.props
+        TGDelEvent("OnValidate", id, this.onValidate);
     }
 
     createLayout() {
-        const { model } = this.props
-        const OperationStartDate = model.get('OperationStartDate')
+        const { OperationStartDate, Name, isAux, DerrickType } = this.props
         const dynamicLayout = {
             Cfg: {
-                ExportName: `${model.get('Name')}.time-tracker`
+                ExportName: `${Name}.time-tracker`
             }
         }
 
         dynamicLayout.LeftCols = createLeftColumns()
 
-        dynamicLayout.Cols = createColumns()
+        dynamicLayout.Cols = createColumns({ isAux })
 
         dynamicLayout.Head = createHead()
 
         dynamicLayout.Foot = createFoot()
 
-        dynamicLayout.Solid = createSolid({ OperationStartDate })
+        dynamicLayout.Solid = createSolid({ OperationStartDate, isAux, DerrickType })
 
         dynamicLayout.Def = createRowsDef()
 
         return mergeLayouts(staticLayout, dynamicLayout)
     }
 
-    getStartOperationDate() {
-        const startDate = this.props.model.get('OperationStartDate')
-
-        return +new Date(startDate) || +new Date()
-    }
-
-    prepareBody() {
-        const { model } = this.props
-        const wells = deepClone(model.get('Wells') || [])
-        const defs = ['Well', 'Phase', 'Event']
-
-        function addRowDefinitions(row, level = 0) {
-            row.Def = defs[level]
-
-            if (row.Items) {
-                row.Items.forEach(row => addRowDefinitions(row, level + 1))
-            }
-        }
-
-        wells.forEach(row => addRowDefinitions(row, 0))
-        console.log(wells)
-        return wells
-    }
-
-    onValidate = (grid, row, col, err, errors) => {
+    onValidate = (grid, row, col) => {
         if (validator[col]) {
             return validator[col](grid, row, col)
         }
 
         return 0
-    }
-
-    onDataChanged = (newData) => {
-        this.setState(
-            { body: newData },
-            () => {
-                this.props.model.set('Wells', newData)
-            }
-        )
     }
 
     getEventStart = (grid, row, get) => {
@@ -134,7 +98,7 @@ class TimeTrackerGrid extends Component {
             return get(eventRow, '_end')
         }
 
-        return this.getStartOperationDate()
+        return this.props.OperationStartDate
     }
 
     getEventEnd = (start, duration) => {
@@ -190,27 +154,18 @@ class TimeTrackerGrid extends Component {
         return grid.Helpers.isNotEmpty(row.actualHours)
     }
 
-    handleOperationStartDateChange = (grid, value) => {
-        this.props.model.set('OperationStartDate', value)
-    }
-
     render() {
-        return <div className="time-grid-view">
-            <TreeGridComponent
-                layout={this.layout}
-                body={this.state.body}
-                nestedKey={TimeTrackerGrid.nestedKey}
-                onDataChanged={this.onDataChanged}
-                getBehindHours={this.getBehindHours}
-                getActualDepth={this.getActualDepth}
-                getPlannedDepth={this.getPlannedDepth}
-                getEventEnd={this.getEventEnd}
-                getEventStart={this.getEventStart}
-                getEventDuration={this.getEventDuration}
-                handleOperationStartDateChange={this.handleOperationStartDateChange}
-                {...this.props}
-            />
-        </div>
+        return <TreeGridComponent
+            layout={this.layout}
+            nestedKey={TimeTrackerGrid.nestedKey}
+            getBehindHours={this.getBehindHours}
+            getActualDepth={this.getActualDepth}
+            getPlannedDepth={this.getPlannedDepth}
+            getEventEnd={this.getEventEnd}
+            getEventStart={this.getEventStart}
+            getEventDuration={this.getEventDuration}
+            {...this.props}
+        />
     }
 }
 

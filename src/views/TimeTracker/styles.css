@@ -1,17 +1,24 @@
-.time-tracker {
-  height: 100%;
-  display: flex;
-}
-
-.time-tracker__col {
-  height: 100%;
-  width: 50%;
-  padding: 0 0;
-}
-
 .time-grid-view {
   height: 100%;
   font-family: RobotoLight, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.time-grid-view__col {
+  height: 100%;
+  flex: 1 50%;
+  padding: 0 0;
+}
+
+.time-grid-view__top-bar {
+  width: 100%;
+  padding: 5px 0;
+}
+
+.time-grid-view__grids {
+  display: flex;
+  flex: 1;
 }
 
 .time-grid-well {

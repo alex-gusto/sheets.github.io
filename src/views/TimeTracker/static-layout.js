@@ -1,6 +1,5 @@
 export default {
     Cfg: {
-        id: 'TimeTracker',
         ShowDeleted: "0",
         AutoSort: "0",
         DateStrings: '1',
@@ -8,8 +7,8 @@ export default {
         MainCol: 'name',
         NoVScroll: 0,
         Sorting: 0,
-        Paging: 2,
-        PageLength: 1,
+        // Paging: 2,
+        // PageLength: 1,
         AutoUpdate: 1,
         StandardFilter: 3,
         SaveExpanded: 1,
@@ -27,6 +26,8 @@ export default {
         FocusRect: 2,
         FormulaEditing: 1,
         Validate: 'Changed,Messages',
+        Sync: 'Horz,Vert',
+        SyncId: 'TimeTracker',
         // CfgId: 'Costs',
         ExportType: 'Expanded,Outline,Indent,ForceBorder,TextType,Strings,FixedRows,Size'
     },

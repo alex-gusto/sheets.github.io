@@ -13,10 +13,28 @@ import merge from 'lodash/merge'
 import helpers from './utils/global-helpers'
 
 const { TreeGrid, Grids } = window
-const dataManager =  new Worker("/sheets.github.io/ManageData.worker.js")
 
+Grids.Test = (grid, target, test) => {
+    console.log(grid.id)
+    return true
+}
+
+Grids.OnCustomAjax = (G, IO, data, func) => {
+    if (IO.Url) {
+        import(`./${IO.Url}`).then(({ default: res }) => func(0, res))
+    } else {
+        G.OnDataChanged(G, JSON.parse(data), func)
+    }
+
+    return true;
+}
+
+// add custom id generator
+Grids.OnGenerateId = () => uuid()
 
 const propTypes = {
+    id: PropTypes.string.isRequired,
+
     // events
     onDataChanged: PropTypes.func,
 
@@ -46,17 +64,16 @@ class TreeGridComponent extends Component {
 
     $el = createRef()
     grid = null
-    #TreeGridUpdatedCallback = noop
     #gridBody = this.prepareBody(this.props.body)
+    #dataManager = new Worker("/sheets.github.io/ManageData.worker.js")
 
     componentDidMount() {
-        this.subscribeDataManagerEvents()
         this.initGrid()
         this.subscribeGridEvents()
     }
 
     componentWillUnmount() {
-        this.unsubscribeDataManagerEvents()
+        this.#dataManager.terminate()
 
         if (!this.grid) return
         this.grid.Dispose()
@@ -68,6 +85,7 @@ class TreeGridComponent extends Component {
         this.grid = TreeGrid(
             {
                 Debug: 'Problem',
+                id: this.props.id,
                 Layout: {
                     Data
                 },
@@ -95,28 +113,20 @@ class TreeGridComponent extends Component {
     }
 
     subscribeGridEvents = () => {
-        Grids.OnCustomAjax = (G, IO, data, func) => {
-            if (this.grid === G) {
-                const { body, nestedKey } = this.props
-                const { Changes } = JSON.parse(data)
+        this.grid.OnDataChanged = (G, { Changes }, func) => {
+            const { body, nestedKey } = this.props
 
-                this.#TreeGridUpdatedCallback = func // TODO: weak place. need to rethink architecture of communication with TreeGrid
-                dataManager.postMessage(['update', { changes: Changes, data: body, nestedKey }])
+            const onDataManagerMessage = (...args) => {
+                this.onDataManagerMessage(...args)
+
+                func(0, { IO: {}, Changes: [] })
+
+                this.#dataManager.removeEventListener('message', onDataManagerMessage)
             }
 
-            return true;
+            this.#dataManager.addEventListener('message', onDataManagerMessage)
+            this.#dataManager.postMessage(['update', { changes: Changes, data: body, nestedKey }])
         }
-
-        // add custom id generator
-        Grids.OnGenerateId = () => uuid()
-    }
-
-    subscribeDataManagerEvents = () => {
-        dataManager.addEventListener('message', this.onDataManagerMessage)
-    }
-
-    unsubscribeDataManagerEvents = () => {
-        dataManager.removeEventListener('message', this.onDataManagerMessage)
     }
 
     onDataManagerMessage = (e) => {
@@ -126,7 +136,7 @@ class TreeGridComponent extends Component {
 
         switch (event) {
             case 'updated':
-                this.onDataUpdated(data.data)
+                this.props.onDataChanged(data.data)
                 break
             case 'error':
                 console.error('Worker error: ', data.data)
@@ -134,15 +144,6 @@ class TreeGridComponent extends Component {
             default:
                 console.debug('Worker: event not found!')
         }
-    }
-
-    onDataUpdated(newData) {
-        this.props.onDataChanged(newData)
-
-        this.#TreeGridUpdatedCallback(0, {
-            IO: {},
-            Changes: []
-        })
     }
 
     /**

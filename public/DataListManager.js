@@ -148,6 +148,8 @@ class DataListManager {
     }
 
     updateItem(id, data) {
+        if (!this.hasItem(id)) return
+
         const item = this.getItem(id)
         const convertedData = this.convertItemKeys(data)
         Object.assign(item, convertedData)
