@@ -1,6 +1,5 @@
 export default {
   Cfg: {
-    Code: 'STRESBEJONTRYB', // licensed code
     FocusRect: 2,
     SelectingCells: 2,
     SelectingFocus: 1,
@@ -18,7 +17,7 @@ export default {
   },
   Panel: {
     PanelCopyMenu:
-      'CopyRowBelow,CopyRowsBelow@F,CopyTree,CopyRowsTreeBelow@F,CopySelected@S,CopySelectedTree@S,CopySelectedChildEnd,CopySelectedTreeChildEnd,-,AddRowBelow,AddRowsBelow@2,CopyEmptyBelow,CopyRowsEmptyBelow@2,CopySelectedEmpty,-,AddChildEnd,CopySelectedEmptyChildEnd'
+        'CopyRowBelow,CopyRowsBelow@F,CopyTree,CopyRowsTreeBelow@F,CopySelected@S,CopySelectedTree@S,CopySelectedChildEnd,CopySelectedTreeChildEnd,-,AddRowBelow,AddRowsBelow@2,CopyEmptyBelow,CopyRowsEmptyBelow@2,CopySelectedEmpty,-,AddChildEnd,CopySelectedEmptyChildEnd'
   },
   Lang: {
     Format: {
