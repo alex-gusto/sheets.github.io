@@ -20,8 +20,9 @@ body, html {
 .views-container {
     position: relative;
     height: 100%;
-    flex: calc(100% - 200px);
-    max-width: calc(100% - 200px);
+    flex: 100%;
+    /*flex: calc(100% - 200px);*/
+    /*max-width: calc(100% - 200px);*/
     padding-left: 10px;
     display: flex;
     flex-direction: column;

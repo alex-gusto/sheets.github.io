@@ -16,30 +16,14 @@ import createRowsDef from '../create-rows-def'
 import getPrevEvent from './utils/get-prev-event'
 import pickNumber from '../../../helpers/pick-number'
 import isUndefined from 'lodash/isUndefined'
-import Validator from '@/components/TreeGridComponent/validator'
-const { TGAddEvent, TGDelEvent } = window
+import Validator from '../../../components/TreeGridComponent/validator'
 
 class TimeTrackerGrid extends Component {
-    static nestedKey = 'Items'
     layout = this.createLayout()
 
-    componentDidMount() {
-        const { id } = this.props
-        TGAddEvent("OnValidate", id, this.onValidate);
-    }
-
-    componentWillUnmount() {
-        const { id } = this.props
-        TGDelEvent("OnValidate", id, this.onValidate);
-    }
-
     createLayout() {
-        const { OperationStartDate, Name, isAux, DerrickType } = this.props
-        const dynamicLayout = {
-            Cfg: {
-                ExportName: `${Name}.time-tracker`
-            }
-        }
+        const { OperationStartDate, isAux, DerrickType } = this.props
+        const dynamicLayout = {}
 
         dynamicLayout.LeftCols = createLeftColumns()
 

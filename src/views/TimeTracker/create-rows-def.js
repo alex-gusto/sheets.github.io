@@ -12,15 +12,11 @@ export default () => {
         wowHoursFormula: 'sum()',
         nptHoursFormula: 'sum()',
         tftHoursFormula: 'sum()',
-        afeHoursFormula: 'sum()',
         targetHoursFormula: 'sum()',
-        _iltHoursFormula: 'sum()',
-        _unPtHoursFormula: 'sum()',
         _plannedDepthFormula: 'calc("_plannedDepth ? _plannedDepth : Result")',
         _actualDepthFormula: 'calc("_actualDepth ? _actualDepth : Result")',
         _startFormula: 'Row.firstChild ? Get(Row.firstChild, "_start") : ""',
         _endFormula: 'Row.lastChild ? Get(Row.lastChild, "_end") : ""',
-        behindHoursFormula: 'calc("behindHours ? behindHours : Result")'
     }
 
     const Well = {
@@ -45,12 +41,7 @@ export default () => {
 
     const eventCalcOrder = [
         'nameClass',
-        'deltaAfeActual',
-        'behindHours',
         '_tftHours',
-        '_unPtHours',
-        '_unPtHoursClass',
-        '_iltHours',
         '_plannedDepth',
         '_plannedDepthClass',
         '_actualDepth',

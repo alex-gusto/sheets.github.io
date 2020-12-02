@@ -1,13 +1,6 @@
 export default ({ isAux }) => {
     const cols = [
         {
-            Name: 'afeHours',
-            MinWidth: 80,
-            CanEmpty: 1,
-            Format: ',0.00',
-            Type: 'Float'
-        },
-        {
             Name: 'targetHours',
             MinWidth: 80,
             CanEmpty: 1,
@@ -48,32 +41,6 @@ export default ({ isAux }) => {
             Format: ',0.00',
             Type: 'Float',
             Formula: 'actualHours - nptHours - wowHours'
-        },
-        {
-            Name: 'unPtHours',
-            Visible: 0,
-            CanHide: 0,
-            CanPrint: 0,
-            CanExport: 0
-        },
-        {
-            Name: '_unPtHours',
-            CanEmpty: 1,
-            CanEdit: 1,
-            OnChange: 'Grid.SetValue(Row, "unPtHours", Value, 1)',
-            MinWidth: 80,
-            Format: ',0.00',
-            ClassFormula: 'Grid.Helpers.isEmpty(unPtHours) && "TSClassReadOnly"',
-            Formula: 'Grid.Helpers.isNotEmpty(unPtHours) ? unPtHours : Grid.Helpers.isEmpty(afeHours) ? actualHours : ""',
-            Type: 'Float'
-        },
-        {
-            Name: '_iltHours',
-            MinWidth: 80,
-            Format: ',0.00',
-            Type: 'Float',
-            CanEmpty: 1,
-            Formula: 'actualHours ? _tftHours - targetHours : ""'
         },
         {
             Name: 'plannedDepth',
@@ -145,35 +112,6 @@ export default ({ isAux }) => {
             Type: 'Date',
             MinWidth: 120,
             Formula: 'Grid.Component.props.getEventEnd(_start, _eventDuration)'
-        },
-        {
-            Name: 'deltaAfeActual',
-            Type: 'Float',
-            Visible: 0,
-            CanHide: 0,
-            CanPrint: 0,
-            CanExport: 0,
-            Formula: '(Grid.Helpers.isNotEmpty(afeHours) ? actualHours - afeHours : actualHours) / 24'
-        },
-        {
-            Name: 'behindHours',
-            MinWidth: 80,
-            Type: 'Float',
-            CanEmpty: 1,
-            Format: '+,0.0; -,0.0; 0',
-            Formula: 'Grid.Component.props.getBehindHours(Grid, Row, Get, deltaAfeActual)'
-        },
-        {
-            Name: 'contractor',
-            MinWidth: 120
-        },
-        {
-            Name: 'comment',
-            MinWidth: 120
-        },
-        {
-            Name: 'experienceLinks',
-            MinWidth: 80
         }
     ]
 

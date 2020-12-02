@@ -5,23 +5,16 @@ export default () => {
         Pos: 'Pos',
         name: "Name",
         code: "Code",
-        afeHours: 'AFE',
-        targetHours: 'Target',
+        targetHours: 'Rounding bug',
         dsvHours: 'DSV',
         actualHours: 'Actual',
         nptHours: 'NPT',
         wowHours: 'WOW',
         _tftHours: 'TFT',
-        _unPtHours: 'UN-PT',
-        _iltHours: 'ILT',
         _plannedDepth: 'Planned',
         _actualDepth: 'Actual',
         _start: 'Start',
-        _end: 'End',
-        behindHours: 'Days -ahead/+behind',
-        contractor: 'Contractor',
-        comment: 'Comment',
-        experienceLinks: 'Ex Links'
+        _end: 'End'
     }
 
     // set align for header' key
@@ -30,31 +23,7 @@ export default () => {
 
     mainHeader.id = 'Header'
 
-    const upHeader = {
-        code: 'Identification',
-        afeHours: 'Duration [h]',
-        plannedDepth: 'End Depth [mMD]',
-        start: 'Timing',
-        contractor: 'Annotation'
-    }
-
-    Object.keys(upHeader).forEach((key) => centerHeader(key, upHeader))
-
-    // merge spanning
-    Object.assign(upHeader, {
-        Kind: 'Header',
-        Spanned: 1,
-        Pos: '',
-        PosSpan: 2,
-        codeSpan: 2,
-        afeHoursSpan: 10,
-        plannedDepthSpan: 4,
-        startSpan: 5,
-        contractorSpan: 3
-    })
-
     return [
-        upHeader,
         mainHeader
     ]
 }

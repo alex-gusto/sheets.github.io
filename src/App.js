@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css'
-import NavBar from './components/NavBar'
+// import NavBar from './components/NavBar'
 import Handsontable from './views/Handsontable'
 import SpreadJS from './views/SpreadJS'
 import ZingGrid from './views/ZingGrid'
 import WijmoGrid from './views/WijmoGrid'
-import TreeGrid from './views/TreeGrid'
 import TimeTracker from './views/TimeTracker'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 
@@ -14,14 +13,14 @@ class Sample extends Component {
     render() {
         return (
             <HashRouter>
-                <NavBar/>
+                {/*<NavBar/>*/}
                 <div className="views-container">
                     <Switch>
-                        <Route path="/time-tracker">
+                        <Route path="/">
                             <TimeTracker/>
                         </Route>
 
-                        <Route exact path="/">
+                        <Route exact path="/handsontable">
                             <Handsontable/>
                         </Route>
                         <Route path="/spread-js">
@@ -32,10 +31,6 @@ class Sample extends Component {
                         </Route>
                         <Route path="/wijmo-grid">
                             <WijmoGrid/>
-                        </Route>
-
-                        <Route path="/tree-grid">
-                            <TreeGrid/>
                         </Route>
                     </Switch>
                 </div>

@@ -14,15 +14,11 @@ export default () => {
         nptHoursFormula: 'sum()',
         wowHoursFormula: 'sum()',
         tftHoursFormula: 'sum()',
-        afeHoursFormula: 'sum()',
         targetHoursFormula: 'sum()',
-        iltHoursFormula: 'sum()',
-        unPtHoursFormula: 'sum()',
         _plannedDepthFormula: '',
         _actualDepthFormula: '',
         _startFormula: '',
-        _endFormula: 'Grid.GetLast() ? Get(Grid.GetLast(), "_end") : ""',
-        behindHoursFormula: 'calc("behindHours ? behindHours : Result")',
+        _endFormula: 'Grid.GetLast() ? Get(Grid.GetLast(), "_end") : ""'
     }
 
     return [total]

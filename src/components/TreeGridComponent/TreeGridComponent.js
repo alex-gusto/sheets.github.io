@@ -6,9 +6,7 @@
 import React, { Component, createRef } from 'react'
 import noop from 'lodash/noop'
 import PropTypes from 'prop-types'
-import { deepClone } from 'core/util/deep-clone'
 import merge from 'lodash/merge'
-import convertObjectToFlatKeys from './utils/convert-object-to-flat-keys'
 import helpers from './utils/global-helpers'
 
 const { TreeGrid, Grids } = window
@@ -181,7 +179,6 @@ class TreeGridComponent extends Component {
             if (item[nestedKey] && item[nestedKey].length) {
                 item.Def = item.Def || DefParent
                 item.Items = item[nestedKey].map(traverse)
-                if (nestedKey !== 'Items') delete item[nestedKey]
             } else {
                 item.Def = item.Def || Def
             }
@@ -189,10 +186,10 @@ class TreeGridComponent extends Component {
             item.DefParent = item.DefParent || DefParent
             item.DefEmpty = item.DefEmpty || DefEmpty
 
-            return convertObjectToFlatKeys(item)
+            return item
         }
 
-        return deepClone(arr).map(traverse)
+        return arr.map(traverse)
     }
 
     render() {

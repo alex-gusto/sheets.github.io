@@ -10,9 +10,7 @@ export default () => {
             Name: 'name',
             RelWidth: 1,
             MinWidth: 250,
-            Type: 'Text',
             CanFilter: 1,
-            ClassFormula: 'afeHours === "" && "text-primary"',
             CaseSensitive: 0
         }
     ]

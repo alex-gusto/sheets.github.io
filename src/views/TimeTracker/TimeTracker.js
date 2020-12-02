@@ -3,18 +3,16 @@ import deepClone from '../../helpers/deep-clone'
 import TimeTrackerGrid from './TimeTrackerGrid'
 import dataService from '../../db/dataService'
 
-const version = 'phases-v2'
-
-const { Grids } = window
-
 class TimeTracker extends Component {
     constructor(props) {
         super(props)
+        let data = window.localStorage.getItem('phases')
+        data = data ? JSON.parse(data) : dataService.getPhases()
 
         this.state = {
             DerrickType: 0,
-            Wells: this.prepareState(dataService.getPhases()),
-            OperationStartDate: this.getStartOperationDate()
+            Wells: this.prepareState(data),
+            OperationStartDate: +new Date()
         }
     }
 
@@ -36,48 +34,21 @@ class TimeTracker extends Component {
         return wells
     }
 
-    getStartOperationDate() {
-        const startDate = this.model.get('OperationStartDate')
-
-        return +new Date(startDate) || +new Date()
-    }
-
-    onDataChanged = (newData, key) => {
-        console.log(key)
+    onDataChanged = (newData) => {
         this.setState(
-            { body: newData },
+            { Wells: newData },
             () => {
-                this.model.set(key, newData)
+                // window.localStorage.setItem('phases', JSON.stringify(newData))
             }
         )
     }
 
     handleOperationStartDateChange = (grid, value) => {
-        this.setState(
-            {
-                OperationStartDate: value
-            },
-            () => {
-                const auxGrid = Grids.TimeTrackerAux
-                if (auxGrid) {
-                    const row = auxGrid.GetRowById('topBarAux')
-                    auxGrid.SetValue(row, 'OperationStartDate', value, 1)
-                }
-
-                this.model.set('OperationStartDate', value)
-            }
-        )
+        this.setState({ OperationStartDate: value })
     }
 
     handleDerrickTypeChange = (grid, value) => {
-        this.setState(
-            {
-                DerrickType: value
-            },
-            () => {
-                this.model.set('DerrickType', value)
-            }
-        )
+        this.setState({ DerrickType: value })
     }
 
     render() {
