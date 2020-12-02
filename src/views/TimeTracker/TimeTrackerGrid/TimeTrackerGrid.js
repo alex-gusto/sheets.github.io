@@ -13,38 +13,11 @@ import createSolid from '../create-solid'
 import createRowsDef from '../create-rows-def'
 
 // Utils
-import getNextEvent from './utils/get-next-event'
 import getPrevEvent from './utils/get-prev-event'
 import pickNumber from '../../../helpers/pick-number'
 import isUndefined from 'lodash/isUndefined'
-
+import Validator from '@/components/TreeGridComponent/validator'
 const { TGAddEvent, TGDelEvent } = window
-
-// TODO: need revision
-const validator = {
-    actualHours(grid, row, col) {
-        if (row.Def.Name !== 'Event') return
-
-        const nextEvent = getNextEvent(grid, row)
-        if (!nextEvent) return 0
-
-        const nextNotEmpty = grid.Helpers.isNotEmpty(nextEvent[col])
-        const currentEmpty = grid.Helpers.isEmpty(row[col])
-
-        if (nextNotEmpty && currentEmpty) {
-            return 1
-        }
-
-        return 0
-    },
-    _tftHours(grid, row, col) {
-        if (row[col] < 0) {
-            return 1
-        }
-
-        return 0
-    }
-}
 
 class TimeTrackerGrid extends Component {
     static nestedKey = 'Items'
@@ -81,14 +54,6 @@ class TimeTrackerGrid extends Component {
         dynamicLayout.Def = createRowsDef()
 
         return mergeLayouts(staticLayout, dynamicLayout)
-    }
-
-    onValidate = (grid, row, col) => {
-        if (validator[col]) {
-            return validator[col](grid, row, col)
-        }
-
-        return 0
     }
 
     getEventStart = (grid, row, get) => {
@@ -164,6 +129,7 @@ class TimeTrackerGrid extends Component {
             getEventEnd={this.getEventEnd}
             getEventStart={this.getEventStart}
             getEventDuration={this.getEventDuration}
+            Validator={Validator}
             {...this.props}
         />
     }

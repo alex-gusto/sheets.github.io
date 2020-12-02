@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import TreeGridComponent from '../../components/TreeGridComponent'
 import deepClone from '../../helpers/deep-clone'
 import TimeTrackerGrid from './TimeTrackerGrid'
-import migrateData from './migrate-data'
 import dataService from '../../db/dataService'
 
 const version = 'phases-v2'
@@ -10,56 +8,18 @@ const version = 'phases-v2'
 const { Grids } = window
 
 class TimeTracker extends Component {
-    model = {
-        attrs: {},
-        set(key, v) {
-            this.attrs[key] = v
-            this.save()
-        },
-        get(key) {
-            return this.attrs[key]
-        },
-        load(v) {
-            this.attrs = v
-        },
-        save() {
-            window.localStorage.setItem(version, this.toJSON())
-        },
-        toJSON() {
-            return JSON.stringify(this.attrs)
-        }
-    }
-
     constructor(props) {
         super(props)
 
-        const attrs = window.localStorage.getItem(version)
-        if (attrs) {
-            this.model.load(JSON.parse(attrs))
-        } else {
-            const [Phases, PhasesAux] = migrateData(dataService.getPhases())
-            const Wells = [{
-                name: 'Main well',
-                Items: Phases
-            }]
-
-            const WellsAux = [{
-                name: 'Aux well',
-                Items: PhasesAux
-            }]
-            this.model.load({ Wells, WellsAux })
-        }
-
         this.state = {
-            DerrickType: this.model.get('DerrickType') || 0,
-            Wells: this.prepareState('Wells'),
-            WellsAux: this.prepareState('WellsAux'),
+            DerrickType: 0,
+            Wells: this.prepareState(dataService.getPhases()),
             OperationStartDate: this.getStartOperationDate()
         }
     }
 
-    prepareState(key) {
-        const wells = deepClone(this.model.get(key) || [])
+    prepareState(data) {
+        const wells = deepClone(data)
         const defs = ['Well', 'Phase', 'Event']
         const reCalc = [3, 3, 256]
 

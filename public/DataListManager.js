@@ -161,7 +161,6 @@ class DataListManager {
             if (/^_|^[A-Z]_/.test(key)) return acc // ignore temp key holders. _key, A_key, B_key
 
             value = +value || value // TODO: replace to TReeGrid config. convert to number.
-            // key = deConvertKey(key)
 
             acc[key] = value
             return acc
