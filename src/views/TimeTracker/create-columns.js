@@ -5,6 +5,7 @@ export default ({ isAux }) => {
             MinWidth: 80,
             CanEmpty: 1,
             Format: ',0.00',
+            EditFormat: '',
             Type: 'Float'
         },
         {
