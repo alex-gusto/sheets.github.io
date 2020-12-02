@@ -1,2 +1,0 @@
-(this["webpackJsonpmy-app"]=this["webpackJsonpmy-app"]||[]).push([[4],{313:function(t,n,p){"use strict";function c(t,n){n["".concat(t,"Rotate")]=2}p.r(n),p.d(n,"default",(function(){return c}))}}]);
-//# sourceMappingURL=4.dcb14024.chunk.js.map

@@ -1,1 +1,0 @@
-{"version":3,"sources":["components/TreeGridComponent/utils/rotate-header.js"],"names":["rotateHeader","key","config"],"mappings":"wGAAe,SAASA,EAAaC,EAAKC,GACtCA,EAAO,GAAD,OAAID,EAAJ,WAAmB,EAD7B","file":"static/js/4.dcb14024.chunk.js","sourcesContent":["export default function rotateHeader(key, config) {\r\n    config[`${key}Rotate`] = 2\r\n}\r\n"],"sourceRoot":""}
