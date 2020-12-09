@@ -49,5 +49,10 @@ export default {
         Delete: 1,
         Select: 1,
         Move: 1
+    },
+    MenuPrint: {
+        Items: 'ColsCaption,Cols,SpaceCaption,RowsCaption,Foot',
+        Attribute: 'CanPrint',
+        HideUnused: '1'
     }
 }
