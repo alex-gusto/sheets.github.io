@@ -5,14 +5,7 @@ export default () => {
         Pos: 'Pos',
         name: "Name",
         code: "Code",
-        targetHours: 'Rounding bug',
-        dsvHours: 'DSV',
-        actualHours: 'Actual',
-        nptHours: 'NPT',
-        wowHours: 'WOW',
-        _tftHours: 'TFT',
-        _plannedDepth: 'Planned',
-        _actualDepth: 'Actual',
+        hours: 'Hours',
         _start: 'Start',
         _end: 'End'
     }

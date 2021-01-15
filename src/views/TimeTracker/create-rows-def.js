@@ -7,14 +7,7 @@ export default () => {
         codeCanEdit: 1,
 
         // calculations
-        dsvHoursFormula: 'sum()',
-        actualHoursFormula: 'sum()',
-        wowHoursFormula: 'sum()',
-        nptHoursFormula: 'sum()',
-        tftHoursFormula: 'sum()',
-        targetHoursFormula: 'sum()',
-        _plannedDepthFormula: 'calc("_plannedDepth ? _plannedDepth : Result")',
-        _actualDepthFormula: 'calc("_actualDepth ? _actualDepth : Result")',
+        hoursFormula: 'sum()',
         _startFormula: 'Row.firstChild ? Get(Row.firstChild, "_start") : ""',
         _endFormula: 'Row.lastChild ? Get(Row.lastChild, "_end") : ""',
     }

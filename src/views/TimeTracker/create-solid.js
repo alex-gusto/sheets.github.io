@@ -3,7 +3,7 @@ export default ({ OperationStartDate, DerrickType, isAux }) => {
         id: 'topBar',
         Space: -1,
         Tag: 'timeGridTopBar',
-        Cells: 'OperationStartDate,DerrickType',
+        Cells: 'OperationStartDate',
 
         // OperationStartDate cell settings
         OperationStartDate,
@@ -14,10 +14,10 @@ export default ({ OperationStartDate, DerrickType, isAux }) => {
         OperationStartDateRecalc: 256,
         OperationStartDateOnChange: 'Grid.Component.props.handleOperationStartDateChange(Grid,Value)',
 
-        DerrickType,
-        DerrickTypeType: 'Bool',
-        DerrickTypeLabel: 'Aux derrick: ',
-        DerrickTypeOnChange: 'Grid.Component.props.handleDerrickTypeChange(Grid,Value)',
+        // DerrickType,
+        // DerrickTypeType: 'Bool',
+        // DerrickTypeLabel: 'Aux derrick: ',
+        // DerrickTypeOnChange: 'Grid.Component.props.handleDerrickTypeChange(Grid,Value)',
     }
 
     const topBarAux = {

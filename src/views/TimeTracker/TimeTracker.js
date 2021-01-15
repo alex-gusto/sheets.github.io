@@ -59,28 +59,24 @@ class TimeTracker extends Component {
                 <div id="timeGridTopBar" className="time-grid-view__top-bar"/>
 
                 <div className="time-grid-view__grids">
-                    <div className="time-grid-view__col">
-                        <TimeTrackerGrid
-                            id="TimeTrackerMain"
-                            body={Wells}
-                            DerrickType={DerrickType}
-                            OperationStartDate={OperationStartDate}
-                            handleDerrickTypeChange={this.handleDerrickTypeChange}
-                            handleOperationStartDateChange={this.handleOperationStartDateChange}
-                            onDataChanged={(data) => this.onDataChanged(data, 'Wells')}
-                        />
-                    </div>
+                    <TimeTrackerGrid
+                        id="TimeTrackerMain"
+                        body={Wells}
+                        DerrickType={DerrickType}
+                        OperationStartDate={OperationStartDate}
+                        handleDerrickTypeChange={this.handleDerrickTypeChange}
+                        handleOperationStartDateChange={this.handleOperationStartDateChange}
+                        onDataChanged={(data) => this.onDataChanged(data, 'Wells')}
+                    />
 
-                    {DerrickType ? <div className="time-grid-view__col">
-                        <TimeTrackerGrid
-                            id="TimeTrackerAux"
-                            isAux={true}
-                            body={WellsAux}
-                            DerrickType={DerrickType}
-                            OperationStartDate={OperationStartDate}
-                            onDataChanged={(data) => this.onDataChanged(data, 'WellsAux')}
-                        />
-                    </div> : ''}
+                    {DerrickType ? <TimeTrackerGrid
+                        id="TimeTrackerAux"
+                        isAux={true}
+                        body={WellsAux}
+                        DerrickType={DerrickType}
+                        OperationStartDate={OperationStartDate}
+                        onDataChanged={(data) => this.onDataChanged(data, 'WellsAux')}
+                    /> : ''}
                 </div>
 
 

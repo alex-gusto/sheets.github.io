@@ -7,8 +7,6 @@ export default {
         MainCol: 'name',
         NoVScroll: 0,
         Sorting: 0,
-        // Paging: 2,
-        // PageLength: 1,
         AutoUpdate: 1,
         StandardFilter: 3,
         SaveExpanded: 1,
@@ -25,7 +23,11 @@ export default {
         Sync: 'Horz,Vert',
         SyncId: 'TimeTracker',
         // CfgId: 'Costs',
-        ExportType: 'Expanded,Outline,Indent,ForceBorder,TextType,Strings,FixedRows,Size'
+        ExportType: 'Expanded,Outline,Indent,ForceBorder,TextType,Strings,FixedRows,Size',
+
+        SelectingCells: 2,
+        SelectingFocus: 2,
+        PasteFocused: 4
     },
     Toolbar: {
         Cells30Manipulate: "Undo,Redo,Add,AddChild,Calc,Outdent,Indent,ExpandAll,CollapseAll"
@@ -51,7 +53,7 @@ export default {
         Move: 1
     },
     MenuPrint: {
-        Items: 'ColsCaption,Cols,SpaceCaption,RowsCaption,Foot',
+        Items: 'ColsCaption,Cols,SpaceCaption,RowsCaption,Foot,OptionsCaption,Options,SizeCaption,Size',
         Attribute: 'CanPrint',
         HideUnused: '1'
     }
