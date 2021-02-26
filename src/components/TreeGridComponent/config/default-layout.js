@@ -1,8 +1,12 @@
 export default {
   Cfg: {
-    FocusRect: 2,
+    FocusRect: 1,
     SelectingCells: 2,
     SelectingFocus: 1,
+  
+    CopyCols: 0,
+    PasteFocused: 4,
+    
     ShowDeleted: 0,
     NoVScroll: 0
   },

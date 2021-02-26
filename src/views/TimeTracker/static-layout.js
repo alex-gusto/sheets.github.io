@@ -23,11 +23,7 @@ export default {
         Sync: 'Horz,Vert',
         SyncId: 'TimeTracker',
         // CfgId: 'Costs',
-        ExportType: 'Expanded,Outline,Indent,ForceBorder,TextType,Strings,FixedRows,Size',
-
-        SelectingCells: 2,
-        SelectingFocus: 2,
-        PasteFocused: 4
+        ExportType: 'Expanded,Outline,Indent,ForceBorder,TextType,Strings,FixedRows,Size'
     },
     Toolbar: {
         Cells30Manipulate: "Undo,Redo,Add,AddChild,Calc,Outdent,Indent,ExpandAll,CollapseAll"
