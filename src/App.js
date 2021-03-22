@@ -14,7 +14,7 @@ class Sample extends Component {
                 <NavBar/>
                 <div className="views-container">
                     <Switch>
-                        <Route path="/">
+                        <Route path="/" exact>
                             <TimeTracker/>
                         </Route>
     
