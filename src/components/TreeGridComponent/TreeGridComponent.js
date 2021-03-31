@@ -81,7 +81,7 @@ class TreeGridComponent extends Component {
   
   subscribeGridEvents = () => {
     this.grid.OnDataChanged = (G, { Changes }, func) => {
-      const { body, nestedKey, ganttRunKey, Validator } = this.props
+      const { body, nestedKey, Validator } = this.props
       let validChanges = []
       let errors = []
       

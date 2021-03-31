@@ -49,8 +49,8 @@ export default (days) => {
     const rowIndex = random(0, 9)
     const row = comments[rowIndex]
     
-    row[`${day}_in`] = 'hello1 hello2 hello3 hello4 hello5 hello6 hello7 hello8 hello9 hello10 hello11 hello12'
+    row[`${day}_in`] = loremIpsum()
   })
-  console.log(comments)
-  return [{ ...daysHeader, id: 'Header' }, ...comments, daysHeader, companiesHeader]
+  
+  return [daysHeader, ...comments, daysHeader, { ...companiesHeader, id: 'Header' }]
 }

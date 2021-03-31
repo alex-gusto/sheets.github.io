@@ -4,8 +4,7 @@ import moment from 'moment'
 const STORAGE_KEY = 'data'
 
 class DataService {
-  data = this.getFromLS() || data;
-  days = this.getDays()
+  data = this.getFromLS() || data
   
   constructor() {
     if (DataService.instance) {

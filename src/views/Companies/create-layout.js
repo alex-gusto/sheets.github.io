@@ -7,11 +7,13 @@ import dataService from '../../db/dataService'
 import createLeftColumns from './create-left-columns'
 
 export default () => {
+  const days = dataService.getDays()
+  
   const dynamicLayout = {
-    Foot: createFoot(dataService.days),
-    Head: createHead(dataService.days),
+    Foot: createFoot(days),
+    Head: createHead(days),
     LeftCols: createLeftColumns(),
-    Cols: createColumns(dataService.days)
+    Cols: createColumns(days)
   }
   
   return mergeLayouts(staticLayout, dynamicLayout)

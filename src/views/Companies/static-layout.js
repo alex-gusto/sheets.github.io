@@ -15,7 +15,8 @@ export default {
     Undo: 32,
     ColPaging: 2,
     NoVScroll: 1,
-    Alternate: 2
+    Alternate: 2,
+    AutoUpdate: 1
   },
   Def: {
     Comment: {
