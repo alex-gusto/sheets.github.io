@@ -16,7 +16,7 @@
               "id": "1-1",
               "name": "Event 1.1",
               "afeHours": 12,
-              "hours": 400,
+              "hours": 10,
               "dsvHours": 12,
               "comment": "",
               "Def": "Event",
@@ -31,9 +31,9 @@
               "id": "1-2",
               "Def": "Event",
               "code": "",
-              "name": "Event 1.12",
+              "name": "Event 1.2",
               "afeHours": 12,
-              "hours": 560,
+              "hours": 24,
               "dsvHours": 12,
               "actualHours": 12,
               "nptHours": "",
@@ -63,7 +63,7 @@
               "id": "2-1",
               "name": "Event 2.1",
               "afeHours": 14,
-              "hours": 360,
+              "hours": 48,
               "dsvHours": 14,
               "comment": "",
               "Def": "Event",
@@ -96,7 +96,7 @@
               "Def": "Event",
               "name": "Event 3.1",
               "afeHours": 12,
-              "hours": 320,
+              "hours": 24,
               "dsvHours": 13,
               "actualHours": 12,
               "nptHours": "",
@@ -182,71 +182,20 @@
             {
               "id": "3fddb36aea4d6402",
               "Def": "Event",
+              "name": "Event 1.1",
               "DefEmpty": "Event",
               "Spanned": 1,
               "Recalc": 256,
-              "afeHours": 12,
-              "codeRowSpan": 2,
-              "nameRowSpan": 2,
-              "afeHoursRowSpan": 2,
-              "hoursRowSpan": 2,
-              "dsvHoursRowSpan": 2,
-              "actualHoursRowSpan": 2,
-              "nptHoursRowSpan": 2,
-              "wowHoursRowSpan": 2,
-              "f_tftHoursRowSpan": 2,
-              "f_unPtHoursRowSpan": 2,
-              "f_iltHoursRowSpan": 2,
-              "f_plannedDepthRowSpan": 2,
-              "f_actualDepthRowSpan": 2,
-              "f_startRowSpan": 2,
-              "f_endRowSpan": 2,
-              "behindHoursRowSpan": 2,
-              "contractorRowSpan": 2,
-              "commentRowSpan": 2,
-              "f_experienceLinksRowSpan": 2,
-              "experienceLinksRowSpan": 2,
-              "unPtHoursRowSpan": 2,
-              "plannedDepthRowSpan": 2,
-              "actualDepthRowSpan": 2,
-              "startRowSpan": 2,
-              "f_eventDurationRowSpan": 2,
-              "f_deltaAfeActualRowSpan": 2
+              "hours": 12
             },
             {
               "id": "ddb36aea4d64029a",
               "Def": "Event",
+              "name": "Event 1.2",
               "DefEmpty": "Event",
               "Spanned": 1,
-              "Recalc": 256
-            }
-          ],
-          "Def": "Phase",
-          "DefEmpty": "Phase"
-        },
-        {
-          "id": "b36aea4d64029a29",
-          "Items": [
-            {
-              "id": "6aea4d64029a2901",
-              "Def": "Event",
-              "DefEmpty": "Event",
-              "Spanned": 1,
-              "Recalc": 256
-            }
-          ],
-          "Def": "Phase",
-          "DefEmpty": "Phase"
-        },
-        {
-          "id": "ea4d64029a290106",
-          "Items": [
-            {
-              "id": "4d64029a290106a0",
-              "Def": "Event",
-              "DefEmpty": "Event",
-              "Spanned": 1,
-              "Recalc": 256
+              "Recalc": 256,
+              "hours": 12
             }
           ],
           "Def": "Phase",

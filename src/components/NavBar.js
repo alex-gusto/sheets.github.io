@@ -10,7 +10,8 @@ class NavBar extends Component {
         <nav className="navigationBarList">
           <Link to="/" className="navItem">Time tracker</Link>
           <Link to="/companies" className="navItem">Companies</Link>
-          {/*<Link to="/zing-grid" className="navItem">Zing Grid</Link>*/}
+          <Link to="/highcharts-gant" className="navItem">Highcharts Gantt</Link>
+          <Link to="/tree-grid-gant" className="navItem">TreeGrid gantt</Link>
           {/*<Link to="/wijmo-grid" className="navItem">Wijmo Grid</Link>*/}
           {/*<Link to="/tree-grid" className="navItem">Tree Grid</Link>*/}
         </nav>

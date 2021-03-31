@@ -6,12 +6,11 @@ import dataService from '../../db/dataService'
 class TimeTracker extends Component {
   constructor(props) {
     super(props)
-    let data = window.localStorage.getItem('phases')
-    data = data ? JSON.parse(data) : dataService.getPhases()
     
     this.state = {
-      DerrickType: 0,
-      Wells: this.prepareState(data),
+      DerrickType: 1,
+      Phases: this.prepareState(dataService.getPhases()),
+      PhasesAux: this.prepareState(dataService.getPhasesAux()),
       OperationStartDate: dataService.getStartTime()
     }
   }
@@ -34,11 +33,11 @@ class TimeTracker extends Component {
     return wells
   }
   
-  onDataChanged = (newData) => {
+  onDataChanged = (newData, key) => {
     this.setState(
-      { Wells: newData },
+      { [key]: newData },
       () => {
-        // window.localStorage.setItem('phases', JSON.stringify(newData))
+        dataService.save(key, newData)
       }
     )
   }
@@ -52,7 +51,7 @@ class TimeTracker extends Component {
   }
   
   render() {
-    const { DerrickType, Wells, WellsAux, OperationStartDate } = this.state
+    const { DerrickType, Phases, PhasesAux, OperationStartDate } = this.state
     
     return (
       <div className="time-grid-view">
@@ -61,21 +60,21 @@ class TimeTracker extends Component {
         <div className="time-grid-view__grids">
           <TimeTrackerGrid
             id="TimeTrackerMain"
-            body={Wells}
+            body={Phases}
             DerrickType={DerrickType}
             OperationStartDate={OperationStartDate}
             handleDerrickTypeChange={this.handleDerrickTypeChange}
             handleOperationStartDateChange={this.handleOperationStartDateChange}
-            onDataChanged={(data) => this.onDataChanged(data, 'Wells')}
+            onDataChanged={(data) => this.onDataChanged(data, 'Phases')}
           />
           
           {DerrickType ? <TimeTrackerGrid
             id="TimeTrackerAux"
             isAux={true}
-            body={WellsAux}
+            body={PhasesAux}
             DerrickType={DerrickType}
             OperationStartDate={OperationStartDate}
-            onDataChanged={(data) => this.onDataChanged(data, 'WellsAux')}
+            onDataChanged={(data) => this.onDataChanged(data, 'PhasesAux')}
           /> : ''}
         </div>
       
