@@ -3,6 +3,36 @@ import moment from 'moment'
 
 const STORAGE_KEY = 'data'
 
+function getPhases(phases, start) {
+  let prevItem = null
+  
+  const calculate = (item, parent) => {
+    const newItem = {
+      name: item.name,
+      id: item.id
+    }
+    
+    if (item.Items) {
+      newItem.Items = item.Items.map(k => calculate(k, newItem))
+    } else {
+      newItem.start = item.start ? item.start : prevItem ? prevItem.end : start
+      newItem.end = newItem.start + (item.hours * 60 * 60 * 1000)
+      prevItem = newItem
+    }
+    
+    if (!parent) return newItem
+    
+    if (!parent.start) {
+      parent.start = newItem.start
+    }
+    parent.end = newItem.end || parent.end
+    
+    return newItem
+  }
+  
+  return phases.map(item => calculate(item))
+}
+
 class DataService {
   data = this.getFromLS() || data
   
@@ -10,6 +40,8 @@ class DataService {
     if (DataService.instance) {
       return DataService.instance
     }
+    
+    window.DataService = this
     
     DataService.instance = this
   }
@@ -41,11 +73,11 @@ class DataService {
   }
   
   getPhases() {
-    return this.data.Phases
+    return getPhases(this.data.Phases, this.getStartTime())
   }
   
   getPhasesAux() {
-    return this.data.PhasesAux
+    return getPhases(this.data.PhasesAux, this.getStartTime())
   }
   
   getCompanies() {

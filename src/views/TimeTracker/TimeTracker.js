@@ -9,8 +9,8 @@ class TimeTracker extends Component {
     
     this.state = {
       DerrickType: 1,
-      Phases: this.prepareState(dataService.getPhases()),
-      PhasesAux: this.prepareState(dataService.getPhasesAux()),
+      Phases: this.prepareState(dataService.data.Phases),
+      PhasesAux: this.prepareState(dataService.data.PhasesAux),
       OperationStartDate: dataService.getStartTime()
     }
   }

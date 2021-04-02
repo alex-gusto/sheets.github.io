@@ -15,27 +15,22 @@
             {
               "id": "1-1",
               "name": "Event 1.1",
-              "afeHours": 12,
               "hours": 10,
-              "dsvHours": 12,
               "comment": "",
               "Def": "Event",
               "DefEmpty": "Event",
               "Spanned": 1,
               "Recalc": 256,
               "experienceLinks": "0|19585|P&A|1|19586||0|19587||0|12341||1|12341|",
-              "experienceTitle": "P&A;",
-              "actualHours": 12
+              "experienceTitle": "P&A;"
             },
             {
               "id": "1-2",
               "Def": "Event",
               "code": "",
               "name": "Event 1.2",
-              "afeHours": 12,
               "hours": 24,
               "dsvHours": 12,
-              "actualHours": 12,
               "nptHours": "",
               "wowHours": "",
               "contractor": "",
@@ -45,11 +40,9 @@
               "unPtHours": "",
               "plannedDepth": "",
               "actualDepth": "",
-              "start": "",
               "DefEmpty": "Event",
               "Spanned": 1,
-              "Recalc": 256,
-              "f_start": "11/28/2020 22:00"
+              "Recalc": 256
             }
           ],
           "Def": "Phase",
@@ -62,17 +55,14 @@
             {
               "id": "2-1",
               "name": "Event 2.1",
-              "afeHours": 14,
               "hours": 48,
-              "dsvHours": 14,
               "comment": "",
               "Def": "Event",
               "DefEmpty": "Event",
               "Spanned": 1,
               "Recalc": 256,
               "experienceLinks": "0|12341|P&A",
-              "experienceTitle": "P&A;",
-              "actualHours": 12
+              "experienceTitle": "P&A;"
             }
           ],
           "Def": "Phase",
@@ -82,12 +72,7 @@
           "id": "aea4d64029a29010",
           "Def": "Phase",
           "name": "Phase 3",
-          "afeHours": 13,
           "hours": 480,
-          "dsvHours": 13,
-          "actualHours": 12,
-          "nptHours": 0,
-          "wowHours": 0,
           "plannedDepth": "",
           "actualDepth": "",
           "Items": [
@@ -95,10 +80,7 @@
               "id": "3-1",
               "Def": "Event",
               "name": "Event 3.1",
-              "afeHours": 12,
               "hours": 24,
-              "dsvHours": 13,
-              "actualHours": 12,
               "nptHours": "",
               "wowHours": "",
               "comment": 1,
@@ -106,8 +88,7 @@
               "actualDepth": "",
               "DefEmpty": "Event",
               "Spanned": 1,
-              "Recalc": 256,
-              "f_start": "11/30/2020 20:00"
+              "Recalc": 256
             }
           ],
           "DefEmpty": "Phase"
@@ -178,6 +159,7 @@
       "Items": [
         {
           "id": "083fddb36aea4d64",
+          "name": "Phase Aux 1",
           "Items": [
             {
               "id": "3fddb36aea4d6402",

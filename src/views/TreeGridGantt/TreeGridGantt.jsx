@@ -4,6 +4,7 @@ import createLayout from './create-layout'
 import createBody from './create-body'
 import dataService from '../../db/dataService'
 import DataListManager from './DataListManager'
+import last from 'lodash/last'
 
 const GRID_ID = 'GANTT'
 
@@ -41,12 +42,22 @@ const TreeGridGant = () => {
   
   const onDataChanged = (newData) => {
     const dataManager = new DataListManager(dataService.getPhasesAux(), 'Items')
-    const events = Function(`return ${newData[1].events}`)()
-    events.forEach(({ Id, Start, Duration, Text }) => {
-      dataManager.updateItem(Id, {
-        start: +new Date(Start),
-        hours: Duration,
-        name: Text
+    
+    newData.forEach(row => {
+      let { events, CanEdit } = row
+      
+      if (!CanEdit) return
+      
+      if (typeof events === 'string') {
+        events = Function(`return ${events}`)()
+      }
+      
+      events.forEach(({ Id, Start, Duration, Text }) => {
+        dataManager.updateItem(Id, {
+          start: +new Date(Start),
+          hours: Duration,
+          name: Text
+        })
       })
     })
     
