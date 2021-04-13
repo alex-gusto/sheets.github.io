@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="GridE.js"></script>
+  </head>
+  <body>
+    <div style="width: 550px; height: 300px">
+      <div id="tag"></div>
+    </div>
+
+    <script>
+      var GridData = {
+        Cfg: {
+          MainCol: "A",
+          AutoUpdate: 1,
+          NoVScroll: 1,
+        },
+        Panel: {
+          Copy: 1,
+          Delete: 1,
+          Select: 1,
+          Move: 1,
+        },
+        Def: {
+          CostGroup: {
+            Color: "#ccc",
+          },
+          Cost: {
+            Color: "#eee",
+          },
+          R: {
+            DefParent: "CostGroup",
+            DefEmpty: "Cost",
+            CDef: "Cost",
+          },
+        },
+        Root: {
+          AcceptDef: "CostGroup,Cost",
+          CDef: "Cost",
+        },
+        Cols: [{ Name: "A", RelWidth: 1 }],
+        Body: [
+          [
+            { A: "R1", id: "1", DefEmpty: "Cost", DefParent: "CostGroup" },
+            { A: "R2", id: "2", DefEmpty: "Cost", DefParent: "CostGroup" },
+          ],
+        ],
+      };
+
+      var grid = window.TreeGrid(
+        {
+          Debug: "check",
+          id: "grid",
+          Layout: {
+            Data: GridData,
+          },
+          Upload: {
+            Attrs: "Def",
+            Format: "JSON",
+            Type: "Changes",
+          },
+        },
+        "tag"
+      );
+
+      window.TGAddEvent("OnChangeDef", "grid", (grid, row, def) => {
+        row.Changed = 1;
+
+        return null;
+      });
+
+      Grids.OnCustomAjax = (G, IO, data, func) => {
+        console.log('data', JSON.parse(data)); // data
+        console.log('changes', JSON.parse(G.GetChanges())); // changes
+
+        G.AcceptChanges();
+
+        return true;
+      };
+    </script>
+  </body>
+</html>
