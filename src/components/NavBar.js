@@ -12,6 +12,7 @@ class NavBar extends Component {
           <Link to="/companies" className="navItem">Companies</Link>
           <Link to="/highcharts-gant" className="navItem">Highcharts Gantt</Link>
           <Link to="/tree-grid-gant" className="navItem">TreeGrid gantt</Link>
+          <Link to="/tree-grid-gant-v2" className="navItem">TreeGrid gantt v2</Link>
           {/*<Link to="/wijmo-grid" className="navItem">Wijmo Grid</Link>*/}
           {/*<Link to="/tree-grid" className="navItem">Tree Grid</Link>*/}
         </nav>

@@ -5,7 +5,7 @@ export default {
         DateStrings: '1',
         ReloadChanged: '3',
         MainCol: 'name',
-        NoVScroll: 0,
+        NoVScroll: 1,
         Sorting: 0,
         AutoUpdate: 1,
         StandardFilter: 3,

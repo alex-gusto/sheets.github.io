@@ -1,14 +1,23 @@
-export default (start) => {
-  return [
-    {
-      Name: 'GANTT',
-      Type: 'Gantt',
-      GanttZoom: 'days',
-      GanttRunSave: 2,
-      GanttDataUnits: 'h',
-      GanttRun: "events",
-      GanttRunAdjust: 'Shrink',
-      GanttRunTip: "*Text*"
-    }
-  ]
+import dataService from '../../db/dataService'
+import createColNames from './create-col-name'
+
+export default () => {
+  const cols = []
+  
+  // dataService.getOnlyEvents().forEach((event,i) => {
+  //   cols.push({
+  //       Name: createColNames.getColNameWithIndex('GanttStart', i),
+  //       Format: 'yyyy-M-d H:mm',
+  //       Type: 'Date',
+  //       Width: 80
+  //     },
+  //     {
+  //       Name: createColNames.getColNameWithIndex('GanttEnd', i),
+  //       Format: 'yyyy-M-d H:mm',
+  //       Type: 'Date',
+  //       Width: 80
+  //     })
+  // })
+  
+  return cols
 }

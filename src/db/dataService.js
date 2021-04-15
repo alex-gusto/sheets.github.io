@@ -3,13 +3,14 @@ import moment from 'moment'
 
 const STORAGE_KEY = 'data'
 
-function getPhases(phases, start) {
+function calculatePhases(phases, start) {
   let prevItem = null
   
   const calculate = (item, parent) => {
     const newItem = {
       name: item.name,
-      id: item.id
+      id: item.id,
+      hours: item.hours
     }
     
     if (item.Items) {
@@ -33,7 +34,31 @@ function getPhases(phases, start) {
   return phases.map(item => calculate(item))
 }
 
+
+const collectItemsOnLevel = (deepArr, level = 0) => {
+  const collector = (acc, item, _level) => {
+    if (level === _level) {
+      acc.push(item)
+      
+      return acc
+    }
+    
+    if (_level < level && item.Items) {
+      item.Items.forEach(it => collector(acc, it, _level + 1))
+    }
+    
+    return acc
+  }
+  
+  
+  return deepArr.reduce((acc, item) => collector(acc, item, 0), [])
+}
+
 class DataService {
+  static WELL_LEVEL = 0
+  static PHASE_LEVEL = 1
+  static EVENT_LEVEL = 2
+  
   data = this.getFromLS() || data
   
   constructor() {
@@ -73,11 +98,23 @@ class DataService {
   }
   
   getPhases() {
-    return getPhases(this.data.Phases, this.getStartTime())
+    return calculatePhases(this.data.Phases, this.getStartTime())
   }
   
   getPhasesAux() {
-    return getPhases(this.data.PhasesAux, this.getStartTime())
+    return calculatePhases(this.data.PhasesAux, this.getStartTime())
+  }
+  
+  getOnlyPhases() {
+    return collectItemsOnLevel(this.getPhases(), DataService.PHASE_LEVEL)
+  }
+  
+  getOnlyEvents() {
+    return collectItemsOnLevel(this.getPhases(), DataService.EVENT_LEVEL)
+  }
+  
+  getOnlyEventsAux() {
+    return collectItemsOnLevel(this.getPhasesAux(), DataService.EVENT_LEVEL)
   }
   
   getCompanies() {

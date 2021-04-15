@@ -1,16 +1,15 @@
 export default () => {
   return [
     {
-      Name: 'name'
-    },
-    {
-      Name: 'events',
-      Width: 100,
+      Name: 'title',
       Visible: 0
     },
     {
-      Name: 'projectEnd',
-      Type: 'Date'
+      Name: 'events',
+      Width: 80,
+      Visible: 0,
+      Button: 'Enum',
+      OnClick: 'Focus,Grid.Component.props.handleRunColStartEdit(Grid,Row, Col)'
     }
   ]
 }

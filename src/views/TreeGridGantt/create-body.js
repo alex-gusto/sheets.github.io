@@ -1,69 +1,64 @@
 import dataService from '../../db/dataService'
+import createColNames from './create-col-name'
 import moment from 'moment'
 
 const CLASSES = ['Aqua', 'Blue', 'Fuchsia', 'Gray', 'Green', 'Lime', 'Maroon', 'Navy', 'Olive', 'Orange', 'Purple', 'Red', 'Silver', 'Teal', 'White', 'Yellow']
 
-const WELL_LEVEL = 0
-const PHASE_LEVEL = 1
-const EVENT_LEVEL = 2
-
-const collectItemsOnLevel = (deepArr, level = WELL_LEVEL, settings = {}) => {
-  const collector = (acc, item, _level) => {
-    const event = {
-      Text: item.name,
-      Id: item.id,
-      Class: CLASSES[acc.length],
-      Start: moment(item.start).format('MM/DD/YYYY HH:mm:ss'),
-      End: moment(item.end).format('MM/DD/YYYY HH:mm:ss'),
-      ...settings
-    }
-    
-    if (level === _level) {
-      acc.push(event)
-      
-      return acc
-    }
-    
-    if (_level < level && item.Items) {
-      item.Items.forEach(it => collector(acc, it, _level + 1))
-    }
+const createMainBars = (arr) => {
+  return arr.reduce((acc, item, i) => {
+    acc[createColNames.getColNameWithIndex('GanttHtml', i)] = item.name
+    acc[createColNames.getColNameWithIndex('GanttClass', i)] = CLASSES[i]
+    acc[createColNames.getColNameWithIndex('GanttStart', i)] = item.start
+    acc[createColNames.getColNameWithIndex('GanttEnd', i)] = item.end
     
     return acc
-  }
-  
-  
-  return deepArr.reduce((acc, item) => collector(acc, item, 0), [])
+  }, {})
+}
+
+const createRunBars = (arr) => {
+  return arr.map((event, i) => {
+    return {
+      Id: event.id,
+      Start: event.start, // moment(event.start).format('MM/DD/YYYY HH:mm:ss'),
+      // End: moment(event.end).format('MM/DD/YYYY HH:mm:ss'),
+      Duration: event.hours,
+      Class: CLASSES[i],
+      Text: event.name
+    }
+  })
 }
 
 export default () => {
-  const phasesMain = collectItemsOnLevel(dataService.getPhases(), PHASE_LEVEL, { Type: 'Fixed' })
-  const eventsMain = collectItemsOnLevel(dataService.getPhases(), EVENT_LEVEL, { Type: 'Fixed' })
-  const phasesAux = collectItemsOnLevel(dataService.getPhasesAux(), PHASE_LEVEL)
-  const eventsAux = collectItemsOnLevel(dataService.getPhasesAux(), EVENT_LEVEL)
-  console.log(phasesMain)
+  const mainBarEvents = createMainBars(dataService.getOnlyEvents())
+  const mainBarEventsForAux = createMainBars(dataService.getOnlyEventsAux())
+  const runBarEventsForAux = createRunBars(dataService.getOnlyEventsAux())
+  
+  console.log(runBarEventsForAux)
   return [
-    {
-      id: '64029a29010',
-      name: 'Main phases',
-      CanEdit: 0,
-      events: phasesMain
-    },
+    // {
+    //   id: '64029a29010',
+    //   name: 'Main phases',
+    //   CanEdit: 0,
+    //   events: 'phasesMain'
+    // },
     {
       id: '24029a29010',
-      name: 'Main events',
+      title: 'Main events',
       CanEdit: 0,
-      events: eventsMain
+      ...mainBarEvents
     },
+    // {
+    //   id: '63029a29010',
+    //   title: 'Aux events',
+    //   ...mainBarEventsForAux
+    // },
+    // {
+    //   id: '54029a29010'
+    // },
     {
-      id: '61029a29010',
-      name: 'Aux phases',
-      CanEdit: 0,
-      events: phasesAux
-    },
-    {
-      id: '63029a29010',
-      name: 'Aux events',
-      events: eventsAux
+      id: 'TimeTrackerAux',
+      title: 'Aux events',
+      events: runBarEventsForAux
     }
   ]
 }

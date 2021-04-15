@@ -178,6 +178,24 @@
               "Spanned": 1,
               "Recalc": 256,
               "hours": 12
+            },
+            {
+              "id": "3addb36aea4d6402",
+              "Def": "Event",
+              "name": "Event 1.3",
+              "DefEmpty": "Event",
+              "Spanned": 1,
+              "Recalc": 256,
+              "hours": 12
+            },
+            {
+              "id": "d5b36aea4d64029a",
+              "Def": "Event",
+              "name": "Event 1.4",
+              "DefEmpty": "Event",
+              "Spanned": 1,
+              "Recalc": 256,
+              "hours": 12
             }
           ],
           "Def": "Phase",

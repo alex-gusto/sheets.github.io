@@ -1,10 +1,27 @@
 export default {
   Cfg: {
     AutoUpdate: 1,
-    Undo: 32,
-    NoVScroll: 1,
-    FastGantt: 1,
+    MainCol: 'name',
+    Size: 'Small',
     GanttStyle: 'Standard'
+  },
+  Def: {
+    Well: {
+      GANTTGanttClass: 'Blue',
+      Calculated: 1,
+      startFormula: 'ganttstart()',
+      endFormula: 'ganttend()'
+    },
+    Phase: {
+      GANTTGanttClass: 'Aqua',
+      Calculated: 1,
+      startFormula: 'ganttstart()',
+      endFormula: 'ganttend()'
+    },
+    R: {
+      DefEmpty: 'R',
+      DefParent: 'Sum'
+    }
   },
   Zoom: [
     {
@@ -45,7 +62,6 @@ export default {
     }
   ],
   Toolbar: {
-    Visible: 0,
     Cells05: "Zoom",
     ZoomType: "SelectGanttZoom",
     ZoomWidth: "90"

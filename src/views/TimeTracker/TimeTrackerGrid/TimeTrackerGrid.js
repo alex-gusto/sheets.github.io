@@ -19,104 +19,104 @@ import isUndefined from 'lodash/isUndefined'
 import Validator from '../../../components/TreeGridComponent/validator'
 
 class TimeTrackerGrid extends Component {
-    layout = this.createLayout()
-
-    createLayout() {
-        const { OperationStartDate, isAux, DerrickType } = this.props
-        const dynamicLayout = {}
-
-        dynamicLayout.LeftCols = createLeftColumns()
-
-        dynamicLayout.Cols = createColumns({ isAux })
-
-        dynamicLayout.Head = createHead()
-
-        dynamicLayout.Foot = createFoot()
-
-        dynamicLayout.Solid = createSolid({ OperationStartDate, isAux, DerrickType })
-
-        dynamicLayout.Def = createRowsDef()
-
-        return mergeLayouts(staticLayout, dynamicLayout)
+  layout = this.createLayout()
+  
+  createLayout() {
+    const { OperationStartDate, isAux, DerrickType } = this.props
+    const dynamicLayout = {}
+    
+    dynamicLayout.LeftCols = createLeftColumns()
+    
+    dynamicLayout.Cols = createColumns({ isAux })
+    
+    dynamicLayout.Head = createHead()
+    
+    dynamicLayout.Foot = createFoot()
+    
+    dynamicLayout.Solid = createSolid({ OperationStartDate, isAux, DerrickType })
+    
+    dynamicLayout.Def = createRowsDef()
+    
+    return mergeLayouts(staticLayout, dynamicLayout)
+  }
+  
+  getEventStart = (grid, row, get) => {
+    const eventRow = getPrevEvent(grid, row)
+    
+    if (eventRow) {
+      return get(eventRow, '_end')
     }
-
-    getEventStart = (grid, row, get) => {
-        const eventRow = getPrevEvent(grid, row)
-
-        if (eventRow) {
-            return get(eventRow, '_end')
-        }
-
-        return this.props.OperationStartDate
+    
+    return this.props.OperationStartDate
+  }
+  
+  getEventEnd = (start, duration) => {
+    if (start && typeof duration === 'number') {
+      return start + duration
     }
-
-    getEventEnd = (start, duration) => {
-        if (start && typeof duration === 'number') {
-            return start + duration
-        }
-
-        return ''
+    
+    return ''
+  }
+  
+  getEventDuration = (...args) => {
+    const hours = pickNumber(...args)
+    
+    if (isUndefined(hours)) return ''
+    
+    return 60 * 60 * 1000 * hours // to milliseconds
+  }
+  
+  getPlannedDepth = (grid, row, get, plannedDepth) => {
+    if (grid.Helpers.isNotEmpty(plannedDepth)) return plannedDepth
+    
+    const eventRow = getPrevEvent(grid, row)
+    if (eventRow) {
+      return get(eventRow, '_plannedDepth')
     }
-
-    getEventDuration = (...args) => {
-        const hours = pickNumber(...args)
-
-        if (isUndefined(hours)) return ''
-
-        return 60 * 60 * 1000 * hours // to milliseconds
+    
+    return 0
+  }
+  
+  getActualDepth = (grid, row, get, actualDepth) => {
+    if (grid.Helpers.isNotEmpty(actualDepth)) return actualDepth
+    
+    if (!this.hasActual(grid, row)) return ''
+    
+    const eventRow = getPrevEvent(grid, row)
+    if (eventRow) {
+      return get(eventRow, '_actualDepth')
     }
-
-    getPlannedDepth = (grid, row, get, plannedDepth) => {
-        if (grid.Helpers.isNotEmpty(plannedDepth)) return plannedDepth
-
-        const eventRow = getPrevEvent(grid, row)
-        if (eventRow) {
-            return get(eventRow, '_plannedDepth')
-        }
-
-        return 0
-    }
-
-    getActualDepth = (grid, row, get, actualDepth) => {
-        if (grid.Helpers.isNotEmpty(actualDepth)) return actualDepth
-
-        if (!this.hasActual(grid, row)) return ''
-
-        const eventRow = getPrevEvent(grid, row)
-        if (eventRow) {
-            return get(eventRow, '_actualDepth')
-        }
-
-        return 0
-    }
-
-    getBehindHours = (grid, row, get, delta) => {
-        if (!this.hasActual(grid, row)) return ''
-
-        const eventRow = getPrevEvent(grid, row)
-        const prevDelta = eventRow ? get(eventRow, 'behindHours') : 0
-
-        return prevDelta + delta
-    }
-
-    hasActual = (grid, row) => {
-        return grid.Helpers.isNotEmpty(row.actualHours)
-    }
-
-    render() {
-        return <TreeGridComponent
-            layout={this.layout}
-            nestedKey={TimeTrackerGrid.nestedKey}
-            getBehindHours={this.getBehindHours}
-            getActualDepth={this.getActualDepth}
-            getPlannedDepth={this.getPlannedDepth}
-            getEventEnd={this.getEventEnd}
-            getEventStart={this.getEventStart}
-            getEventDuration={this.getEventDuration}
-            Validator={Validator}
-            {...this.props}
-        />
-    }
+    
+    return 0
+  }
+  
+  getBehindHours = (grid, row, get, delta) => {
+    if (!this.hasActual(grid, row)) return ''
+    
+    const eventRow = getPrevEvent(grid, row)
+    const prevDelta = eventRow ? get(eventRow, 'behindHours') : 0
+    
+    return prevDelta + delta
+  }
+  
+  hasActual = (grid, row) => {
+    return grid.Helpers.isNotEmpty(row.actualHours)
+  }
+  
+  render() {
+    return <TreeGridComponent
+      layout={this.layout}
+      nestedKey={TimeTrackerGrid.nestedKey}
+      getBehindHours={this.getBehindHours}
+      getActualDepth={this.getActualDepth}
+      getPlannedDepth={this.getPlannedDepth}
+      getEventEnd={this.getEventEnd}
+      getEventStart={this.getEventStart}
+      getEventDuration={this.getEventDuration}
+      Validator={Validator}
+      {...this.props}
+    />
+  }
 }
 
 export default TimeTrackerGrid
