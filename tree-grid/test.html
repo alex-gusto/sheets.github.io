@@ -73,11 +73,15 @@
         return null;
       });
 
-      Grids.OnCustomAjax = (G, IO, data, func) => {
-        console.log('data', JSON.parse(data)); // data
-        console.log('changes', JSON.parse(G.GetChanges())); // changes
+      Grids.OnUpload = function (G, data, row) {
+        if (row) return G.GetXmlData();
+      };
 
-        G.AcceptChanges();
+      Grids.OnCustomAjax = (G, IO, data, func) => {
+        console.log("data", JSON.parse(data)); // data
+        console.log("changes", JSON.parse(G.GetChanges())); // changes
+
+        // G.AcceptChanges();
 
         return true;
       };
